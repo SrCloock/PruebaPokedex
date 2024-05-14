@@ -8,10 +8,14 @@ const buscarPokemon = (query) => {
     if (!isNaN(query)) {
         pokemon = data.find(p => p.id === parseInt(query));
     } else {
-        pokemon = data.find(p => p.name.english.toLowerCase() === query.toLowerCase());
+        pokemon = data.find(p => p.name.english.toLowerCase() === query.toLowerCase() ||
+                                   p.name.japanese.toLowerCase() === query.toLowerCase() ||
+                                   p.name.chinese.toLowerCase() === query.toLowerCase() ||
+                                   p.name.french.toLowerCase() === query.toLowerCase());
     }
     return pokemon;
 };
+
 
 const server = http.createServer((req, res) => {
     if (req.url === '/') {
